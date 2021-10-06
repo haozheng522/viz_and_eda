@@ -6,6 +6,7 @@ output: github_document
 
 ```{r}
 library(tidyverse)
+library(ggridges)
 ```
 load in a dataset that we'll use often.
 
@@ -96,6 +97,51 @@ weather_df %>%
   ggplot(aes(x=tmin,y=tmax)) +
   geom_hex() #geom_bin_2d()
 ```
+
+### univariate plots
+
+```{r}
+weather_df %>%
+  ggplot(aes(x=tmax,fill=name)) +
+  geom_histogram()+
+  facet_grid(.~name)
+
+```
+
+let's try some other plots...
+
+```{r}
+weather_df %>%
+  ggplot(aes(x=tmax,fill=name))+
+  geom_density(alpha=.3)
+
+```
+
+still with 'tmax' and 'name'
+
+```{r}
+weather_df %>%
+  ggplot(aes(x=name,y=tmax))+
+  geom_boxplot()
+```
+
+some people like violin plots??
+
+```{r}
+weather_df %>%
+  ggplot(aes(x=name,y=tmax))+
+  geom_violin()
+```
+
+what about ridges...
+
+```{r}
+weather_df %>%
+  ggplot(aes(x=tmax,y=name))+
+  geom_density_ridges(alpha=.8,scale=.8)
+
+```
+
 
 
 
